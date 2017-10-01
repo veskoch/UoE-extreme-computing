@@ -22,5 +22,4 @@ for entry in sys.stdin:
 	if tokens_found and bytes_found:
 		break
 
-print("{0}\t{1}".format(max_bytes, "bytes"))
-print("{0}\t{1}".format(max_tokens, "tokens"))
+print("{0}\t{1}".format(-max_bytes, -max_tokens))

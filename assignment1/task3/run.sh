@@ -22,9 +22,9 @@ hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.
  -D mapreduce.job.reduces=1 \
  -input /user/$USER/data/output/assignment1/task3-temp/part-* \
  -output /user/$USER/data/output/assignment1/task3 \
- -files $LOCAL/reducer.py \
+ -files $LOCAL/reducer-2.py \
  -mapper cat \
- -reducer reducer.py
+ -reducer reducer-2.py
 
 #Save output locally for debugging
 hdfs dfs -cat /user/$USER/data/output/assignment1/task3/part-00000 | head -20 > $LOCAL/output.out
