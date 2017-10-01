@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #Set task var
-export TASK=task1
+export TASK=task4
 export OUTPUT=/user/$USER/data/output/assignment1/$TASK
-export INPUT=/data/assignments/ex1/webSmall.txt
+export INPUT=/user/$USER/data/output/assignment1/task2/part-*
 export LOCAL=/afs/inf.ed.ac.uk/user/s17/s1753272/Desktop/EXC/assignment1/$TASK
 
 #Clear previous output, if any
@@ -14,9 +14,10 @@ rm $LOCAL/output.out
 hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
  -input $INPUT \
  -output $OUTPUT \
- -file $LOCAL/mapper.py \
+ -files $LOCAL/mapper.py, $LOCAL/reducer.py \
  -mapper mapper.py \
- -reducer NONE
+ -combiner reducer.py \
+ -reducer reducer.py
 
 #Save output locally for debugging
 hdfs dfs -cat $OUTPUT/part-00000 | head -20 > $LOCAL/output.out
