@@ -2,19 +2,26 @@
 
 import sys
 
+bytes_found = False
+tokens_found = False
 max_bytes = 0
 max_tokens = 0
 
-for line in sys.stdin:
-	line = line.strip()
-	len_bytes, len_tokens = line.split("\t", 1)
-	len_bytes = int(len_bytes)
-	len_tokens = int(len_tokens)
+for entry in sys.stdin:
+	entry = entry.strip()
+	Value, Type = entry.split("\t")
+	Value = int(Value)
 
-	if len_bytes > max_bytes:
-		max_bytes = len_bytes
+	if not bytes_found and Type == "bytes":
+		max_bytes = Value
 
-	if len_tokens > max_tokens:
-		max_tokens = len_tokens
 
-print("{0}\t{1}".format(max_bytes, max_tokens))
+	if not tokens_found and Type == "tokens":
+		max_tokens = Value
+
+	# no need to to do more iterations than necessary
+	if tokens_found and bytes_found:
+		break
+
+print("{0}\t{1}".format(max_bytes, "bytes"))
+print("{0}\t{1}".format(max_tokens, "tokens"))
