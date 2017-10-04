@@ -17,7 +17,5 @@ for line in sys.stdin:
 	if len_tokens > max_tokens:
 		max_tokens = len_tokens
 
-# Negate - helpful in finding max because Hadoop sorts in ascending order by default
-# That will be useful in Reduce
-print("{0}\t{1}".format(-max_bytes, "bytes"))
-print("{0}\t{1}".format(-max_tokens, "tokens"))
+print("{0}\t{1}".format(max_bytes, "bytes"))
+print("{0}\t{1}".format(max_tokens, "tokens"))

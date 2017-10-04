@@ -2,6 +2,9 @@
 
 import sys
 
+# time two MapReduce jobs: one with two MapReducers, the other one with unbounded memeory problem
+# I suppose the unbounded memeory will be faster 
+
 # The idea here is to collapse tokens on context.
 #
 # For example, given 'big green apple' context, 

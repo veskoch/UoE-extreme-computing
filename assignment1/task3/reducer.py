@@ -12,11 +12,13 @@ for entry in sys.stdin:
 	Value, Type = entry.split("\t")
 	Value = int(Value)
 
-	if not bytes_found and Type == "bytes":
+	if Type == "bytes":
 		max_bytes = Value
+		bytes_found = True
 
-	if not tokens_found and Type == "tokens":
+	if Type == "tokens":
 		max_tokens = Value
+		tokens_found = True
 
 	# no need to to do more iterations than necessary
 	if tokens_found and bytes_found:
