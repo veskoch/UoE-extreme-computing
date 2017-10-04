@@ -3,24 +3,35 @@
 import sys
 
 # iniatialize
-prev_line = False
-single_occurence = True
+prev_stud = ""
 
 #iterate
 for line in sys.stdin:
-	line = line.strip()		#housekeeping
+	tokenized = line.strip().split("   ")
 
-	# line appears at least twice?
-	if prev_line == line:
-		single_occurence = False
+	tag = tokenized[0]
+	stud_id = tokenized[1]
 
-	else:
-		if (prev_line or prev_line == "") and single_occurence:		# this accounts for empty lines
-			print(prev_line)
+	if prev_stud:
+		if prev_stud != stud_id:
+			print("")
 
-		prev_line = line
-		single_occurence = True
+	if tag == "student":
+		sys.stdout.write("{0} -->".format(stud_id))
 
-# Don't forget the last line
-if prev_line == line and single_occurence:
-	print(line)
+	if tag == "mark":
+		course = tokenized[2]
+		grade = tokenized[3]
+		sys.stdout.write(" ({0}, {1})".format(grade, course))
+
+	prev_stud = stud_id
+
+# Check corner cases
+# student   124   Kalyn	
+# mark   124   AV   97	
+# mark   124   INF1-CG   80	
+# mark   124   ANLP   68	
+# student   129   Alfrey	
+# mark   129   ES   45	
+# student   133   Aldis	
+# student   138   Allis	

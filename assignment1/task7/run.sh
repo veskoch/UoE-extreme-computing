@@ -12,16 +12,18 @@ rm $LOCAL/output.out
 
 #Run
 hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
-	-D stream.map.output.field.separator="   " \
-	-D stream.num.map.output.key.fields=2 \
-	-D mapreduce.map.output.key.field.separator=.
-	-D num.key.fields.for.partition=2
- -D mapreduce.partition.keycomparator.options="-k2,2nr -k1,1" \
- -files $LOCAL/mapper.py,$LOCAL/reducer.py \
+ -D mapreduce.job.output.key.comparator.class=org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator \
+ -D mapreduce.map.output.key.field.separator="   " \
+ -D mapreduce.partition.keypartitioner.options="-k2,2n" \
+ -D mapreduce.partition.keycomparator.options="-k2,2n -k1,1r" \
+ -D stream.map.output.field.separator="   " \
+ -D stream.num.map.output.key.fields=4 \
+ -files $LOCAL/reducer.py \
  -input $INPUT \
  -output $OUTPUT \
  -mapper cat \
- -reducer reducer.py
+ -reducer reducer.py \
+ -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner
 
 #Save output locally for debugging
 hdfs dfs -cat $OUTPUT/part-00000 | head -20 > $LOCAL/output.out
