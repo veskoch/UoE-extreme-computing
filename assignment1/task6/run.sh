@@ -11,12 +11,10 @@ hdfs dfs -rm -r $OUTPUT
 rm $LOCAL/output.out
 
 #Run
-haddop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
-
-
 hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
+ -D mapreduce.job.output.key.comparator.class=org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator \
  -D mapreduce.job.reduces=1
- -D mapreduce.partition.keycomparator.options="-k1,1nr" \
+ -D mapreduce.partition.keypartitioner.options=-k1 \
  -input $INPUT \
  -output $OUTPUT \
  -files $LOCAL/mapper.py, $LOCAL/reducer.py \
