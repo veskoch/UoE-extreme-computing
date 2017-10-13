@@ -1,4 +1,4 @@
-#! usr/bin/python
+#!/usr/bin/python
 
 import sys
 
@@ -12,5 +12,5 @@ for line in sys.stdin:
 		lowest_avg = avg
 		print("{0}\t{1}".format(stud_id, avg))
 
-	if avg == lowest_avg:
+	elif avg == lowest_avg:
 		print("{0}\t{1}".format(stud_id, avg))
