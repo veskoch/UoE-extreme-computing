@@ -2,46 +2,41 @@
 
 import sys
 
-# The idea here is using stripes (as described in lecture): group pairs into an ..
-# .. associate array (i.e. Python dictionary)
+# The idea here is to use a version of stripes, as described in lecture. We only
+# stdout context followed by a list of counts of the possible forth words, for example:
+# big green apple	[7, 4, 3]
+# This strategy is possible, because we know the input is sorted and there are no duplicates.
+# Later, the reducer will do a merge in case the same context had been split between mappers.
 # 
-# The motivation is to collapse on context, 
-# 1) reducing the overal size of the dataset and saving bandwidth during Shuffle & Sort, and
-# 2) lowering work the Hadoop sorter has to do (because there are fewer keys)
+# The motivation is to, 
+# 1) reduce the overal size of the dataset and save bandwidth during Shuffle & Sort, and
+# 2) lower work the Hadoop sorter has to do (because there are fewer keys)
+#
+# While technically the list is unbounded,
 
 
 prev_context = ""
-# subtotal is is the preliminary denominator ..
-# later we will get the sum of all subtotals to get the final denominator
-subtotal = 0
-d = {}
+l = []
 
 for line in sys.stdin:
 	seq, count = line.strip().split("\t")
 	count = int(count)
 	seq = seq.split()
 	context = seq[0] + " " + seq[1] + " " + seq[2]
-	token = seq[3]
 
 	if prev_context != context:
 		if prev_context:
 		# if we have previous context, i.e. ..
 		# .. not first line in stdin
-			print("{0}\t{1}\t{2}".format(prev_context, d, subtotal))
-			subtotal = 0
+			print("{0}\t{1}".format(prev_context, l))
 
-		d = {}
-		d[token] = count
-		subtotal += count
+		l = []
+		l.append(count)
 		prev_context = context
 
 	else:
-		if token in d:
-			d[token] += int(count)
-		else:
-			d[token] = int(count)
-		subtotal += int(count)
+		l.append(count)
 
 
 if prev_context == context:
-	print("{0}\t{1}\t{2}".format(prev_context, d, subtotal))
+	print("{0}\t{1}".format(prev_context, l))
