@@ -18,10 +18,10 @@ hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.
  -D mapreduce.partition.keycomparator.options="-k2,2n -k1,1r" \
  -D stream.map.output.field.separator="   " \
  -D stream.num.map.output.key.fields=4 \
- -files $LOCAL/reducer.py \
+ -files $LOCAL/reducer.py,$LOCAL/mapper.py \
  -input $INPUT \
  -output $OUTPUT \
- -mapper cat \
+ -mapper mapper.py \
  -reducer reducer.py \
  -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner
 

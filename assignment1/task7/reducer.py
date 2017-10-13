@@ -7,7 +7,7 @@ prev_stud = ""
 
 #iterate
 for line in sys.stdin:
-	tokenized = line.strip().split("   ")
+	tokenized = line.strip().split("\t")
 
 	tag = tokenized[0]
 	stud_id = tokenized[1]
@@ -16,10 +16,10 @@ for line in sys.stdin:
 		if prev_stud != stud_id:
 			print("")
 
-	if tag == "student":
+	if tag == "0":
 		sys.stdout.write("{0} -->".format(stud_id))
 
-	if tag == "mark":
+	if tag == "1":
 		course = tokenized[2]
 		grade = tokenized[3]
 		sys.stdout.write("  ({0}, {1})".format(grade, course))

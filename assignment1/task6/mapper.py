@@ -14,7 +14,6 @@ import sys
 #
 # While technically the list is unbounded,
 
-
 prev_context = ""
 l = []
 
