@@ -22,7 +22,7 @@ for line in sys.stdin:
 	if tag == "mark":
 		course = tokenized[2]
 		grade = tokenized[3]
-		sys.stdout.write(" ({0}, {1})".format(grade, course))
+		sys.stdout.write("  ({0}, {1})".format(grade, course))
 
 	prev_stud = stud_id
 
