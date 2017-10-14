@@ -15,11 +15,12 @@ hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.
  -D mapreduce.job.output.key.comparator.class=org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator \
  -D mapreduce.partition.keycomparator.options="-k1,1n" \
  -D mapreduce.job.reduces=1 \
- -files $LOCAL/reducer.py,$LOCAL/mapper.py \
+ -files $LOCAL/reducer.py,$LOCAL/mapper.py,$LOCAL/combiner.py \
  -input $INPUT \
  -output $OUTPUT \
  -reducer reducer.py \
  -mapper mapper.py \
+ -combiner combiner.py \
  -partitioner org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner
 
 #Save output locally for debugging
