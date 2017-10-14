@@ -19,5 +19,5 @@ for line in sys.stdin:
 				grade = float(re.search(r"(?<=\()[0-9]+", record).group())
 				summed += grade
 
-		avg = summed / num_courses
-		print("{0}\t{1}".format(avg, stud_id))
+			avg = summed / num_courses
+			print("{0}\t{1}".format(avg, stud_id))
