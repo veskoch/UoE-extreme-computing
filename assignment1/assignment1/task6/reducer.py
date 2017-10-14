@@ -2,7 +2,7 @@
 
 import sys, math, ast
 
-prev_context = ""
+prev_context = None
 prev_l = {}
 
 def findEntropy(context, l):
@@ -20,7 +20,7 @@ def findEntropy(context, l):
 		prob = float(nominator) / sum(l)
 		entropy -= prob * math.log(prob, 2)
 		# here do the entropy math deivision and sumation
-	print("{0}\t{1}".format(context, entropy))
+	print("{0} {1}\t".format(context, entropy))
 
 
 for line in sys.stdin:

@@ -10,7 +10,7 @@ for line in sys.stdin:
 
 	if avg < lowest_avg:
 		lowest_avg = avg
-		print("{0}\t{1}".format(stud_id, avg))
+		print("student: {0}\taverage: {1}".format(stud_id, int(avg)))
 
 	elif avg == lowest_avg:
-		print("{0}\t{1}".format(stud_id, avg))
+		print("student: {0}\taverage: {1}".format(stud_id, int(avg)))

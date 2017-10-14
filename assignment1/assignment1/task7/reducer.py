@@ -16,13 +16,13 @@ for line in sys.stdin:
 		if prev_stud != stud_id:
 			print("")
 
-	if tag == "0":
+	if tag == "s":
 		sys.stdout.write("{0} -->".format(stud_id))
 
-	if tag == "1":
+	if tag == "m":
 		course = tokenized[2]
 		grade = tokenized[3]
-		sys.stdout.write("  ({0}, {1})".format(grade, course))
+		sys.stdout.write(" ({0},{1}) ".format(grade, course))
 
 	prev_stud = stud_id
 
