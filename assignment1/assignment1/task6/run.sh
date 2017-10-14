@@ -12,7 +12,6 @@ rm $LOCAL/output.out
 
 #Run
 hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
- -D mapreduce.job.reduces=1 \
  -D mapreduce.partition.keypartitioner.options=-k1 \
  -files $LOCAL/mapper.py,$LOCAL/reducer.py \
  -input $INPUT \
