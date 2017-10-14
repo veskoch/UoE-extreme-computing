@@ -17,13 +17,19 @@ for entry in sys.stdin:
 	if prev_line == line or flag == "M":
 		single_occurence = False
 
+	# current line is different than previous line
 	else:
-		if (prev_line or prev_line == "") and single_occurence:         # this accounts for empty lines
-			print(prev_line)
+		if prev_line or prev_line == "": # this accounts for empty lines
+			if single_occurence:		
+				print(prev_line + "\tS")
+			else:
+				# put a marker indicating the line is a duplicate
+				# keep in output to match against output of other mappers
+				print(prev_line + "\tM")
 
 		prev_line = line
 		single_occurence = True
 
 # Don't forget the last line
-if prev_line == line and single_occurence:
-	print(line)
+if prev_line == line:
+	print(line + "\tS")

@@ -12,11 +12,12 @@ rm $LOCAL/output.out
 
 #Run
 hadoop jar /opt/hadoop/hadoop-2.7.3/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
- -files $LOCAL/mapper.py,$LOCAL/reducer.py \
+ -files $LOCAL/mapper.py,$LOCAL/reducer.py,,$LOCAL/combiner.py \
  -input $INPUT \
  -output $OUTPUT \
  -mapper mapper.py \
- -reducer reducer.py
+ -reducer reducer.py \
+ -combiner combiner.py
 
 #Save output locally for debugging
 hdfs dfs -cat $OUTPUT/part-00000 | head -20 > $LOCAL/output.out
