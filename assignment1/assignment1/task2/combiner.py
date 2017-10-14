@@ -12,6 +12,8 @@ for entry in sys.stdin:
 	flag = tokenized[-1]						# catch the flag
 	if len(tokenized) > 1:						# accomodate for empty text
 		line = tokenized[0]
+	else:
+		line = ""
 
 	# line appears more than once?
 	if prev_line == line or flag == "M":
