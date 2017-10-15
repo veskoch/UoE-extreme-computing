@@ -12,4 +12,4 @@ import sys
 # the 'S' flag (that happens because repetitive lines may be sent to different mappers).
 
 for line in sys.stdin:
-		print(line.strip() + "\tS")
+	print(line.strip() + "\tS")
