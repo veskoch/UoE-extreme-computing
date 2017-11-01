@@ -16,8 +16,9 @@ def findEntropy(context, l):
 	"""
 
 	entropy = 0
+	denominator = sum(l)
 	for nominator in l:
-		prob = float(nominator) / sum(l)
+		prob = float(nominator) / denominator
 		entropy -= prob * math.log(prob, 2)
 		# here do the entropy math deivision and sumation
 	print("{0} {1}\t".format(context, entropy))

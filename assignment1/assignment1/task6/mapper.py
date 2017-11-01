@@ -20,8 +20,7 @@ l = []
 for line in sys.stdin:
 	seq, count = line.strip().split("\t")
 	count = int(count)
-	seq = seq.split()
-	context = seq[0] + " " + seq[1] + " " + seq[2]
+	context = seq.rsplit(" ",1)[0]
 
 	if prev_context != context:
 		if prev_context:
