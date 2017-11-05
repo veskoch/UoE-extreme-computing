@@ -12,7 +12,7 @@ top10 = []
 
 for line in sys.stdin:
 	post = ET.fromstring(line.strip()).attrib
-	if "ViewCount" in post:
+	if post["PostTypeId"] == "1" and "ViewCount" in post:
 		viewCount = int(post["ViewCount"])
 		if len(top10) < 10:
 			heapq.heappush(top10, (viewCount, post["Id"]))
