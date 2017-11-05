@@ -1,18 +1,19 @@
 #!/bin/bash
 
 #Set task var
-export TASK=task8
-export OUTPUT=/user/$USER/assignment2/$TASK
 export INPUT=/afs/inf.ed.ac.uk/group/teaching/exc/ex2/part4/queriesLarge.txt
 
 
 #Clear previous output, if any
-hdfs dfs -rm -r $OUTPUT
+rm $LOCAL/output-full.txt
 rm $LOCAL/output.out
 
 # Run
-./task8.py < INPUT > output-full
-hdfs dfs -copyFromLocal output-full OUTPUT
+./task8.py < INPUT > output-full.txt
 
-# Save first 20 lines of output locally
-cat output-full | head -20 > output.out
+# Save first 20 lines of output
+cat output-full.txt | head -20 > output.out
+
+
+# Line below for local testing
+# ./task8.py < queriesSmall.txt > output-full.txt

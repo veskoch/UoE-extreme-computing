@@ -9,22 +9,6 @@ dictionary = {}
 N = 0
 i = 0
 
-# Quick test to make sure Lossy Counting makes sense
-# 
-# count = {}
-# for line in sys.stdin:
-# 	N += 1
-# 	if line in count:
-# 		count[line] += 1
-# 	else:
-# 		count[line] = 1
-
-# d_view = [ (v,k) for k,v in count.iteritems() ]
-# d_view.sort(reverse=True) # natively sort tuples by first element
-# print(N)
-# for v,k in d_view:
-#     print "%s: %d" % (k,v)
-
 
 for line in sys.stdin:
 	line = line.strip()
@@ -51,3 +35,24 @@ f = (threshold - error) * N
 for key in dictionary:
 	if dictionary[key] >= f:
 		print(str(key) + "\n")
+
+
+# --- --- --- --- --- --- --- --- --- --- --- --- 
+# --- --- --- --- --- ---
+# --- --- ---
+#
+# Quick test to make sure Lossy Counting makes sense
+# 
+# count = {}
+# for line in sys.stdin:
+# 	N += 1
+# 	if line in count:
+# 		count[line] += 1
+# 	else:
+# 		count[line] = 1
+
+# d_view = [ (v,k) for k,v in count.iteritems() ]
+# d_view.sort(reverse=True) # natively sort tuples by first element
+# print(N)
+# for v,k in d_view:
+#     print "%s: %d" % (k,v)
