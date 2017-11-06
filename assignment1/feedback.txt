@@ -1,0 +1,10 @@
+s1753272	task 1	2.0 / 2.0 
+s1753272	task 2	2.0 / 3.0 Output correct, but fails on empty input. Using more than 1 reducer - good. Could have used a combiner.
+s1753272	task 3	3.0 / 3.0 Output correct. Most of the work distributed in mappers and used 1 reducer for final result - good.
+s1753272	task 4	2.0	/ 2.0 Good job on using a combiner!
+s1753272	task 5	2.0 / 4.0 Incorrect result in the output file. (-2pt)
+s1753272	task 6	4.0	/ 5.0 inefficient - use of unbounded lists in mapper and reducer
+s1753272	task 7	2.0 / 3.0 no need to print s/m at all, could check #tokens in reducer
+s1753272	task 8	2.5 / 3.0 Combiner is optionally run, therefore potentially inefficient. In mapper combiner is required in this case.
+
+s1753272	total	19.5
