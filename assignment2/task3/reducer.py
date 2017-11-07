@@ -2,48 +2,20 @@
 
 import sys
 
-# most answering author seen so far by the reducer/combiner
-most_answered = {}
-most_count = -1
-most_owner = None
-most_posts = []
-
-# sliding window of one currently tracked author
-answered = []
-prev_userId = None
+prev_postId = None
 
 for line in sys.stdin:
-	userId, postId = line.strip().split(" ->")
-	postId = postId.strip().split(", ")
+	line = line.strip().split("\t")
 
-	if not prev_userId:
-	# first line in file
-		answered += postId
+	if len(line) == 1:
+		# We found a Question with an Accepted Answer. 
+		# Save the answer Id to compare it with the next line.
+		prev_postId = line[0]
 	else:
-		if prev_userId == userId: 	
-		# current user is same as previous user
-			answered += postId
-		else:		
-		# current user is different than previous user
-			if len(answered) > most_count:
-			# we found new most prolific user
-				most_count = len(answered)
-				most_owner = prev_userId
-				most_posts = answered
-
-			# in any case, null counts and keep looking
-			answered = []
-			answered += postId
-
-	# on each iteration
-	prev_userId = userId
-
-# Don't forget the last line
-if prev_userId == userId:
-	if len(answered) > most_count:
-		most_count = len(answered)
-		most_owner = prev_userId
-		most_posts = answered
-
-	most_posts = ', '.join(map(str, most_posts))
-	print("{0} -> {1}".format(most_owner, most_posts))
+		# This line contains Answer meta-data.
+		# If the Id of the Answer matches the Id on the previous line, then jackpot!
+		if prev_postId == line[0]:
+			# We found an Accepted Answer.
+			# print: [ID of the author of the answer] -> [ID of the parent question]
+			print("{0} -> {1}".format(line[1], line[2]))
+		prev_postId = None
