@@ -1,6 +1,0 @@
-big green apple pie	7
-big green apple donut	4
-big green apple candy	3
-small red apple pie	1
-small red apple tree	2
-tiny grey mouse ears	5
